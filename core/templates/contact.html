@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block title %}اتصل بنا{% endblock %}
+{% block content %}
+<p>نرحب دوما بتواصلكم مع مجموعة مستخدمي الرياض، ونحرص على التجواب السريع مع أي مراسلات سواءً كانت استفسارات عن نشاطات المجموعة أو مساهمة فيها. للرعاية والتعاون نرجو استخدام <a href="{% url 'sponsor' %}">النموذج المخصص</a>.</p>
+
+	<form action="{% url 'contact' %}" method="post" class="form">
+		{% csrf_token %}
+		{% bootstrap_form form %}
+		{% buttons %}
+			<button type="submit" class="btn btn-success">
+				 {% bootstrap_icon "ok-sign" %} أرسل 
+			</button>
+		{% endbuttons %}
+	</form>
+{% endblock %}

@@ -13,7 +13,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import permission_required, login_required
 
 from datetimewidget.widgets import DateTimeWidget
-
+from post_office import mail
 from events.models import Event, Attendee, Organizer
 
 class EventForm(forms.ModelForm):

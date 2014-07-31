@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block title %}التعاون والرعاية{% endblock %}
+{% block content %}
+<p><strong>مجموعة مستخدمي لينكس الرياض</strong> مجموعة شبابية تطوعية تهدف للنفع العام والخدمة المجتمعية. ليس لنشاطاتها أي مردود مادي لأي من أعضائها، ونسعى لأن تكون نشاطاتنا متاحة للجميع بلا قيود ولا مقابل. لنا لقاءات دورية يجتمع فيها الشباب المهتمون بالبرمجيات الحرة، ولنا نشاطات أخرى للتوعية المجتمعية.  دعمكم وتعاونكم مع المجموعة سيترجم كله لمساهمة حقيقية في زيادة الوعي المجتمعي التقني الهادف.</p>
+
+	<form action="{% url 'sponsor' %}" method="post" class="form">
+		{% csrf_token %}
+		{% bootstrap_form form %}
+		{% buttons %}
+			<button type="submit" class="btn btn-success">
+				 {% bootstrap_icon "ok-sign" %} أرسل 
+			</button>
+		{% endbuttons %}
+	</form>
+{% endblock %}
