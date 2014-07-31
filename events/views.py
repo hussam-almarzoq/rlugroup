@@ -4,6 +4,7 @@ import string
 import random
 
 from django import forms
+from django.conf import settings
 from django.utils import timezone
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404
@@ -109,7 +110,7 @@ def show_event(request, event_id):
         event = get_object_or_404(Event, pk=event_id)
     else:
         event = get_object_or_404(Event, pk=event_id,
-                                  announcement_date__gte=now)
+                                  announcement_date__lte=now)
 
     if event.starting_date > now and event.max_attendees > event.attendee_set.count():
         attendable = True
@@ -124,7 +125,7 @@ def attend_event(request, event_id):
     # time.
     now = timezone.now()
     event = get_object_or_404(Event, pk=event_id,
-                              announcement_date__gte=now)
+                              announcement_date__lte=now)
     context = {'event': event}
 
     if event.max_attendees > event.attendee_set.count():
@@ -141,6 +142,11 @@ def attend_event(request, event_id):
                 new_attendee = form.save()
                 after_url = reverse('events:show_attendee',
                                     args=(event.pk, random_slug))
+                full_url = request.build_absolute_uri(after_url)
+                mail.send([new_attendee.email], settings.EVENT_FROM_EMAIL,
+                          template='add_attendee',
+                          context={'event': event, 'attendee': new_attendee, 'full_url': full_url})
+                full_url
                 return HttpResponseRedirect(after_url)     
                 
             else:
@@ -189,8 +195,13 @@ def control_attendee(request, event_id, attendee_slug):
             if 'action' in request.POST and request.POST['action'] == 'cancel':
                 attendee.is_counted = False
                 attendee.save()
-                after_url = reverse('events:show_attendee',
-                                args=(event.pk, attendee.slug))
+                after_url = reverse('events:show_event',
+                                    args=(event.pk,))
+                event_full_url = request.build_absolute_uri(after_url)
+                mail.send([attendee.email], settings.EVENT_FROM_EMAIL,
+                          template='cancel_attendee',
+                          context={'event': event, 'attendee': attendee, 'event_full_url': event_full_url})
+
                 return HttpResponseRedirect(after_url)
             else: # Normal editing
                 form = AttendeeForm(request.POST, instance=attendee)
