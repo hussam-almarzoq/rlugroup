@@ -27,7 +27,7 @@
 
 	<div class="col-md-3">
 		{% if editable and attendee.is_counted %}
-			<p><a href="{% url 'events:control_attendee' attendee.event.pk attendee.slug %}" class="form-control btn btn-success"><span class="glyphicon glyphicon-pencil"></span> عدّل</a></p>
+			<p><a href="{% url 'events:control_attendee' attendee.event.pk attendee.slug %}" class="form-control btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> عدّل أو ألغِ</a></p>
 		{% endif %}
 	</div>
 
