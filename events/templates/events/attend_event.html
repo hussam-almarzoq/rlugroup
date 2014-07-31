@@ -1,0 +1,35 @@
+{% extends 'base.html' %}{% load bootstrap3 %}
+{% block title %}حضور {{ event.name }}{% endblock %}
+{% block content %}
+<h2>حضور <a href="{% url 'events:show_event' event.pk %}">{{ event.name }}</a></h2>
+{% if error %}
+<p class="alert alert-warning">
+{% if error == 'booked' %}
+حجزت جميع المقاعد، ولم يعد ممكنا التسجيل في هذا النشاط. نتطلع لرؤيتك في نشاط قادم!
+{% elif error == 'event_done' %}
+انتهى {{ event.name }} ولم يعد بمقدورك تعديل معلومات حضورك.
+{% endif %}
+</p>
+{% else %}
+	<form action="{% if edit %}{% url 'events:control_attendee' event.pk attendee.slug %}{% else %}{% url 'events:attend' event.pk %}{% endif %}" method="post" class="form">
+		{% csrf_token %}
+		{% bootstrap_form form %}
+		{% buttons %}
+			<button type="submit" class="btn btn-success">
+				{% if edit %}{% bootstrap_icon "pencil" %} عدّل {% else %} {% bootstrap_icon "ok-sign" %} سجّل {% endif %}
+			</button>
+		{% endbuttons %}
+	</form>
+	{% if edit %}
+	<form action="{% url 'events:control_attendee' event.pk attendee.slug %}" method="post" class="form">
+		{% csrf_token %}
+		<input type="hidden" name="action" value="cancel"/>
+		{% buttons %}
+			<button type="submit" class="btn btn-danger">
+				{% bootstrap_icon "remove" %} ألغِ
+			</button>
+		{% endbuttons %}
+	</form>
+	{% endif %}
+{% endif %}
+{% endblock %}

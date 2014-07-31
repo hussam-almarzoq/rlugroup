@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}قائمة نشطات المجموعة{% endblock %}
+{% block content %}
+
+{% if perms.events.add_event %}
+<p><a href="{% url 'events:create_event' %}">أنشئ نشاطا</a></p>
+{% endif %}
+{% if next_event %}
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">نشاط المجموعة القادم: <a href="{% url 'events:show_event' next_event.pk %}">{{ next_event.name }}</a></h3>
+	</div>
+	 <div class="panel-body">
+		<p>{{ next_event.short_description }} <a href="{% url 'events:show_event' next_event.pk %}">المكان والتسجيل</a></p>
+	</div>
+</div>
+{% endif %}
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">نشاطات المجموعة</h3>
+	</div>
+	 <div class="panel-body">
+		{% if page_events %}
+
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>الحدث</th>
+					<th>الوقت</th>
+					<th>المكان</th>
+					<th></th>
+				</tr>
+			</thead>
+			 <tbody>
+				{% for e in page_events %}
+				<tr>
+					<td><a href="{% url 'events:show_event' e.pk %}">{{ e.name }}</a></td>
+                       			<td>{{ e.starting_date|date:"j F Y" }}</td>
+                       			<td>{{ e.location }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<div style="text-align:center;">
+		    <span class="step-links">
+		        {% if page_events.has_previous %}
+		            <a href="?page={{ page_events.previous_page_number }}">السابق</a>
+		        {% endif %}
+
+        		<span class="current">
+		            الصفحة {{ page_events.number }} من {{ page_events.paginator.num_pages }}
+		        </span>
+
+        		{% if page_events.has_next %}
+		            <a href="?page={{ page_events.next_page_number }}">التالي</a>
+		        {% endif %}
+		    </span>
+		</div>
+		{% else %}
+			<p>لا توجد نشاطات.</p>
+		{% endif %}
+	</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}{% load bootstrap3 %}
+{% block title %}{% if edit %} تعديل {{ event.name }}{% else %}إضافة نشاط{% endif %}{% endblock %}
+{% block content %}
+<h2>{% if edit %} تعديل {{ event.name }}{% else %}إضافة نشاط{% endif %}</h2>
+	<form action="{% if edit %}{% url 'events:edit_event' event.pk %}{% else %}{% url 'events:create_event' %}{% endif %}" method="post" class="form">
+		{% csrf_token %}
+		{% bootstrap_form form %}
+			{% buttons %}
+			<button type="submit" class="btn btn-primary">
+				{% if edit %}{% bootstrap_icon "pencil" %} عدّل {% else %} {% bootstrap_icon "ok-sign" %} أضف {% endif %}
+		        </button>
+			{% endbuttons %}
+	</form>
+<script>
+$(function(){
+	$('#id_announcement_date').datepicker({isRTL: true});
+});
+</script>
+{% endblock %}

@@ -1,0 +1,174 @@
+<!DOCTYPE html>{% load staticfiles %}
+<!-- By abdulmogeeb@arabgnulinux.org, 
+This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>RiyadhLUG</title>
+
+    <!-- Bootstrap core CSS -->
+   <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+   <link href="{% static 'css/bootstrap-rtl.min3.2.css' %}" rel="stylesheet">
+   <!--<link href="https://raw.githubusercontent.com/morteza/bootstrap-rtl/master/dist/css/bootstrap-rtl.min.css" rel="stylesheet">-->
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/custom.css' %}" rel="stylesheet">
+  </head>
+<!-- NAVBAR
+================================================== -->
+  <body>
+    <div class="navbar-wrapper">
+      <div class="container">
+
+        <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="{% url 'home' %}">لينكس الرياض</a>
+            </div>
+            <div class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li><a href="{% url 'events:home' %}">النشاطات</a></li>
+                <li><a href="#contact">التواصل</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">أشياء أخرى <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li class="dropdown-header">Nav header</li>
+                    <li><a href="#">Separated link</a></li>
+                    <li><a href="#">One more separated link</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- Carousel
+    ================================================== -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="item active">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>الشريحة الأولى</h1>
+              <p><img src="{% static 'img/saudi-tux-arabin_140x140.jpg' %}"></p>
+              <p>مرحبا بك في مجموعة لينكس الرياض، حيث تاكل البطاري الكسبة</p>
+              <p><a class="btn btn-lg btn-primary" href="#" role="button">انظم الينا اليوم</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>نشاطات على ارض الواقع</h1>
+              <p>تقيم المجموعة نشاطات عن البرمجيات الحرة في الرياض ...</p>
+              <p><a class="btn btn-lg btn-primary" href="#" role="button">اقرا المزيد</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>العمل التطوعي</h1>
+              <p>مجموعة من الشباب نعمل بشكل تطوعي خدمة لهدف نبيل</p>
+              <p><a class="btn btn-lg btn-primary" href="#" role="button">شاهد احداث سابقة</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+    </div><!-- /.carousel -->
+
+
+
+
+
+    <div class="container marketing">
+
+      <!-- Three columns of text below the carousel -->
+      <div class="row">
+        <div class="col-lg-4">
+          <img class="img-circle" src="{% static 'img/saudi-tux-arabin_140x140.jpg' %}" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+          <h2>احضر</h2>
+          <p>واصف جميل واشياء اخرى ممكن ان تضاف هنا عن هذا الكائن والتغيير عن طريق الملف الخاص بالتصميم وكل عام وانتم بخير وكل سنة وانتو طيبين وبس نكثر الكلام عشان يكون واضح للمعاينة</p>
+          <p><a class="btn btn-default" href="#" role="button">شاهد التفاصيل</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+          <img class="img-circle" src="{% static 'img/saudi-tux-arabin_140x140.jpg' %}" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+          <h2>ارعى</h2>
+          <p>واصف جميل واشياء اخرى ممكن ان تضاف هنا عن هذا الكائن والتغيير عن طريق الملف الخاص بالتصميم وكل عام وانتم بخير وكل سنة وانتو طيبين وبس نكثر الكلام عشان يكون واضح للمعاينة</p>
+          <p><a class="btn btn-default" href="#" role="button">شاهد التفاصيل</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+          <img class="img-circle" src="{% static 'img/saudi-tux-arabin_140x140.jpg' %}" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+          <h2>كن متحدثا</h2>
+            <p>واصف جميل واشياء اخرى ممكن ان تضاف هنا عن هذا الكائن والتغيير عن طريق الملف الخاص بالتصميم وكل عام وانتم بخير وكل سنة وانتو طيبين وبس نكثر الكلام عشان يكون واضح للمعاينة</p>
+            <p><a class="btn btn-default" href="#" role="button">شاهد التفاصيل</a></p>
+        </div><!-- /.col-lg-4 -->
+      </div><!-- /.row -->
+
+
+      <!-- START THE FEATURETTES -->
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7 text-right">
+          <h2 class="featurette-heading">يوم الأمان الرقمي. <span class="text-muted">طه منذر يتحدث عن الهندسة الاجتماعية.</span></h2>
+          <p class="lead">طه منذر يتحدث عن الهندسة الاجتماعية ويقول اشياء كثيرة كثيرة وهالفراغ احاول اسدة باي كلام ورقصني ياعويس وسلام على محمد وعلى ال محمد</p>
+        </div>
+        <div class="col-md-5">
+          <div class="embed-responsive embed-responsive-4by3">
+            <iframe class="embed-responsive-item" src="http://www.youtube.com/embed/FKsKIIBl9UM?list=PL2XZZMqQj7YB2CNWwpArg8xnEqZ1oRzbM"></iframe>
+            <iframe src="http://www.youtube-nocookie.com/embed/videoseries?list=PL2XZZMqQj7YB2CNWwpArg8xnEqZ1oRzbM" frameborder="0" allowfullscreen></iframe>
+        </div>  
+        </div>
+      </div>
+     <hr class="featurette-divider">
+      
+      <!-- /END THE FEATURETTES -->
+
+
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+      </footer>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="http://getbootstrap.com/assets/js/docs.min.js"></script>
+  </body>
+</html>

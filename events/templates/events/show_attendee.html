@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}{{ attendee.event.name }}{% endblock %}
+{% block content %}
+<h2>تذكرة حضور {{ attendee.event.name }} {% if not attendee.is_counted %}<span style="color: red;">(ملغاه)</span>{% endif %}</h2>
+
+<div class="row">
+	<div class="col-md-9">
+	<table class="table-hover table">
+		<colgroup>
+			<col class="col-xs-2">
+			<col class="col-xs-7">
+		</colgroup>
+		<tr>
+			<th>الاسم</th>
+			<td>{{ attendee.name }}</td>
+		</tr>
+		<tr>
+			<th>الجنس</th>
+			<td>{{ attendee.get_gender }}</td>
+		</tr>
+		<tr>
+			<th>كيف تعرفت على النشاط؟</th>
+			<td>{{ attendee.get_referral }}</td>
+		</tr>
+	</table>
+	</div>
+
+	<div class="col-md-3">
+		{% if editable and attendee.is_counted %}
+			<p><a href="{% url 'events:control_attendee' attendee.event.pk attendee.slug %}" class="form-control btn btn-success"><span class="glyphicon glyphicon-pencil"></span> عدّل</a></p>
+		{% endif %}
+	</div>
+
+</div>
+
+{% endblock %}
