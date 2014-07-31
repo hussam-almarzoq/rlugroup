@@ -6,8 +6,14 @@
 <p class="alert alert-warning">
 {% if error == 'booked' %}
 حجزت جميع المقاعد، ولم يعد ممكنا التسجيل في هذا النشاط. نتطلع لرؤيتك في نشاط قادم!
-{% elif error == 'event_done' %}
+{% elif error == 'done' %}
+	{% if edit %}
 انتهى {{ event.name }} ولم يعد بمقدورك تعديل معلومات حضورك.
+	{% else %}
+انتهى {{ event.name }} ولم يعد بمقدورك التسجيل.
+	{% endif %}
+{% elif error == 'unavailable' %}
+هذا النشاط غير متاح للتسجيل بعد.
 {% endif %}
 </p>
 {% else %}

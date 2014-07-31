@@ -112,7 +112,7 @@ def show_event(request, event_id):
         event = get_object_or_404(Event, pk=event_id,
                                   announcement_date__lte=now)
 
-    if event.starting_date > now and event.max_attendees > event.attendee_set.count():
+    if event.ending_date > now and event.max_attendees > event.attendee_set.count():
         attendable = True
     else:
         attendable = False
@@ -124,11 +124,16 @@ def attend_event(request, event_id):
     # Only allow attending events that are on or past the announcement
     # time.
     now = timezone.now()
-    event = get_object_or_404(Event, pk=event_id,
-                              announcement_date__lte=now)
+    event = get_object_or_404(Event, pk=event_id)
     context = {'event': event}
 
-    if event.max_attendees > event.attendee_set.count():
+    if now >= event.ending_date:
+        context['error'] = 'done'
+    elif event.announcement_date > now.date():
+        context['error'] = 'unavailable'
+    elif event.attendee_set.count() == event.max_attendees:
+        context['error'] = 'booked'
+    else:
         if request.method == 'POST':
             while True:
                 random_slug = "".join([random.choice(string.digits+string.ascii_letters) for i in xrange(6)])
@@ -146,7 +151,6 @@ def attend_event(request, event_id):
                 mail.send([new_attendee.email], settings.EVENT_FROM_EMAIL,
                           template='add_attendee',
                           context={'event': event, 'attendee': new_attendee, 'full_url': full_url})
-                full_url
                 return HttpResponseRedirect(after_url)     
                 
             else:
@@ -154,8 +158,6 @@ def attend_event(request, event_id):
         elif request.method == 'GET':
             form = AttendeeForm()
             context['form'] = form
-    else:
-        context['error'] = 'booked'
 
     return render(request, 'events/attend_event.html', context)
 
@@ -188,7 +190,7 @@ def control_attendee(request, event_id, attendee_slug):
     context = {'attendee': attendee, 'event': event, 'edit': True}
     form = AttendeeForm(instance=attendee)
     if now > event.starting_date:
-        context['error'] = 'event_done'
+        context['error'] = 'done'
     else:
         if request.method == 'POST':
             # Cancellation form/button
