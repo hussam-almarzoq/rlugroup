@@ -5,8 +5,8 @@
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     -------------------------------------------------- */
     /* Padding below the footer and lighter body text */
-    @import url(http://fonts.googleapis.com/earlyaccess/droidarabicnaskh.css);
-    @import url(http://fonts.googleapis.com/css?family=Ubuntu);
+    @import url(https://fonts.googleapis.com/earlyaccess/droidarabicnaskh.css);
+    @import url(https://fonts.googleapis.com/css?family=Ubuntu);
      
     body {
 background:
@@ -143,3 +143,63 @@ background-color:#FCFCFC;
 	    padding: 0px;
 	}
 }
+
+
+#header {
+    text-align: center;
+}
+
+#header img {
+width: 140px;
+height: 140px;
+}
+
+#header h1 {
+    font-weight: 700;
+    font-size: 45px;
+    margin-right: 15px;
+}
+
+#header h1 a {
+    color: #5A5A5A;
+}
+
+#header h1 a:hover {
+    text-decoration: none;
+}
+
+
+
+
+.footer {
+    padding-bottom: 2em;
+    border-top: 1px solid #E5E5E5;
+    background-color: #F5F5F5;
+    margin-top: 3em;
+}
+
+.navbar-nav {
+    width: 100%;
+    text-align: center;
+}
+
+.navbar-nav > li {
+   float: none;
+   display: inline-block;
+}
+
+
+.navbar-inverse {
+    background-color: #F5F5F5;
+    border-color: 1px solid #E5E5E5;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+ color: black;
+}
+
+
+/*
+.navbar-inverse .navbar-nav > li > a {
+    color: black;
+}*/
