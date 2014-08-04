@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+{% block meta %}{% endblock %}
     <link rel="icon" href="../../favicon.ico">
 
     <title>لينكس الرياض | {% block title %}{% endblock %}</title>
@@ -16,6 +17,14 @@
    <!--<link href="https://raw.githubusercontent.com/morteza/bootstrap-rtl/master/dist/css/bootstrap-rtl.min.css" rel="stylesheet">-->
     <!-- Custom styles for this template -->
     <link href="{% static 'css/custom.css' %}" rel="stylesheet">
+    <link href="{% static 'css/jquery-ui.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">
+
+    <script src="{% static 'js/jquery-1.11.1.min.js'%}"></script>
+    <script src="{% static 'js/jquery-ui.min.js'%}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap-datetimepicker.min.js' %}"></script>
+
   </head>
 <!-- NAVBAR
 ================================================== -->
@@ -48,7 +57,7 @@
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <li><a href="{% url 'events:home' %}">النشاطات</a></li>
-                <li><a href="{% url 'contact' %}">الميثاق</a></li>
+                <li><a href="{% url 'charter' %}">الميثاق</a></li>
                 <li><a href="{% url 'contact' %}">تواصل</a></li>
               </ul>
             </div>
@@ -78,12 +87,6 @@
 
     </div><!-- /.container -->
 
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
 {% if request.get_host == 'riyadhlug.org' or request.get_host == 'www.riyadhlug.org' %}
         <!-- Piwik -->
         <script type="text/javascript">
