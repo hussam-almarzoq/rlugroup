@@ -11,14 +11,22 @@ class Event(models.Model):
     location_description = models.TextField(verbose_name=u"تفاصيل المكان", help_text=u'الوصف مثلا', blank=True)
     long_position   = models.DecimalField (max_digits=10, decimal_places=5, verbose_name=u"خط الطول")
     lat_position   = models.DecimalField (max_digits=10, decimal_places=5, verbose_name=u"خط العرض")
-    short_description = models.TextField(u'الوصف القصير', help_text=u"سيستخدم في الصفحة الرئيسية للأنشطة")
-    description = models.TextField(u'الوصف', help_text=u"الوصف الكامل")
+    short_description = models.TextField(u'الوصف القصير', help_text=u"سيستخدم في الصفحة الرئيسية للأنشطة (يمكن استخدام HTML")
+    description = models.TextField(u'الوصف', help_text=u"الوصف الكامل (يمكن استخدام HTML)")
     starting_date = models.DateTimeField(u'تاريخ ووقت بدء الحدث')
     ending_date =  models.DateTimeField(u'تاريخ ووقت انتهاء')
     announcement_date =  models.DateField(u'تاريخ الإعلان', help_text=u"متى تريد أن يظهر هذا النشاط للزوار؟")
     max_attendees = models.PositiveSmallIntegerField(verbose_name=u"العدد الأقصى للحضور", help_text=u"كم عدد التذاكر التي سيسمح بحجزها؟")
     submission_date = models.DateTimeField(u'تاريخ الإرسال',
                                            auto_now_add=True)
+    available_to_choices = (
+        ('A', u'الجميع'),
+        ('F', u'النساء'),
+        ('M', u'الرجال'),
+        )
+    available_to = models.CharField(max_length=1,
+                                    verbose_name=u"متاح لـ",
+                                    choices=available_to_choices)
     edit_date = models.DateTimeField(u'تاريخ التعديل', auto_now=True)
     
 class Attendee(models.Model):
