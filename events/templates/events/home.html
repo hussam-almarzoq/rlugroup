@@ -2,22 +2,20 @@
 {% block title %}قائمة نشطات المجموعة{% endblock %}
 {% block content %}
 
-{% if perms.events.add_event %}
-<p><a href="{% url 'events:create_event' %}">أنشئ نشاطا</a></p>
-{% endif %}
+
 {% if next_event %}
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h3 class="panel-title">نشاط المجموعة القادم: <a href="{% url 'events:show_event' next_event.pk %}">{{ next_event.name }}</a></h3>
 	</div>
 	 <div class="panel-body">
-		<p>{{ next_event.short_description }} <a href="{% url 'events:show_event' next_event.pk %}">المكان والتسجيل</a></p>
+		<p>{{ next_event.short_description|safe }} <a href="{% url 'events:show_event' next_event.pk %}">المكان والتسجيل</a></p>
 	</div>
 </div>
 {% endif %}
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<h3 class="panel-title">نشاطات المجموعة</h3>
+		<h3 class="panel-title">نشاطات المجموعة {% if perms.events.add_event %}<a href="{% url 'events:create_event' %}">(أنشئ)</a>{% endif %}</h3>
 	</div>
 	 <div class="panel-body">
 		{% if page_events %}

@@ -17,13 +17,40 @@ from datetimewidget.widgets import DateTimeWidget
 from post_office import mail
 from events.models import Event, Attendee, Organizer
 
+
 class EventForm(forms.ModelForm):
+    def clean(self):
+        cleaned_data = super(EventForm, self).clean()
+        if 'ending_date' in cleaned_data and 'starting_date' \
+           in cleaned_data:
+            if cleaned_data['starting_date'] > cleaned_data['ending_date']:
+                msg = u'تاريخ انتهاء الحدث بعد تاريخ بدئه!'
+                # Add an error message to specific fields.
+                self._errors["starting_date"] = self.error_class([msg])
+                self._errors["ending_date"] = self.error_class([msg])
+                # Remove invalid fields
+                del cleaned_data["starting_date"]
+                del cleaned_data["ending_date"]
+
+        if 'starting_date' in cleaned_data and 'announcement_date' \
+           in cleaned_data:
+            if cleaned_data['announcement_date'] > cleaned_data['starting_date']:
+                msg = u'تاريخ الإعلان عن الحدث بعد تاريخ بدئه!'
+                # Add an error message to specific fields.
+                self._errors["starting_date"] = self.error_class([msg])
+                self._errors["announcement_date"] = self.error_class([msg])
+                # Remove invalid fields
+                del cleaned_data["starting_date"]
+                del cleaned_data["announcement_date"]
+
+        return cleaned_data
+
     class Meta:
         model = Event
         fields = ['name', 'location', 'location_description',
                   'long_position', 'lat_position',
                   'short_description', 'description', 'starting_date',
-                  'ending_date', 'announcement_date', 'max_attendees']
+                  'ending_date', 'announcement_date', 'max_attendees', 'available_to']
         widgets = {
              'starting_date': DateTimeWidget(attrs={'id':"starting_date"}),
              'ending_date': DateTimeWidget(attrs={'id':"starting_date"})
@@ -102,7 +129,6 @@ def edit_event(request, event_id):
     return render(request, 'events/create_event.html', context)
 
 def show_event(request, event_id):
-
     # If the user has the view_event permission, show events
     # regardless of their announcement date.
     now = timezone.now()
@@ -113,11 +139,17 @@ def show_event(request, event_id):
                                   announcement_date__lte=now)
 
     if event.ending_date > now and event.max_attendees > event.attendee_set.count():
-        attendable = True
-    else:
-        attendable = False
+        attendable = 'yes'
+    elif now > event.ending_date:
+        attendable = 'over'
+    elif event.attendee_set.count() >= event.max_attendees:
+        attendable = 'book'
 
-    context = {'event': event, 'attendable': attendable}
+    event_url = reverse('events:show_event', args=(event.pk,))
+    full_url = request.build_absolute_uri(event_url)
+
+    context = {'event': event, 'attendable': attendable,
+               'full_url': full_url}
     return render(request, 'events/show_event.html', context)
 
 def attend_event(request, event_id):
