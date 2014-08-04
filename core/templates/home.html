@@ -4,21 +4,21 @@
       <!-- Three columns of text below the carousel -->
       <div class="row">
         <div class="col-lg-4">
-          <img src="{% static 'img/user.png' %}" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+          <img src="{% static 'img/user.png' %}" alt="احضر" style="width: 140px; height: 140px;">
           <h2>احضر</h2>
           <p>تعرّف على نشاطنا القادم واحضره! نشاطاتنا تدور في فلك البرمجيات الحرة والثقافة الحرة وهي عامة والدعوة لها مفتوحة وغالبا ما تكون متاحة للرجال والنساء.</p>
           <p><a class="btn btn-default" href="{% url 'events:home' %}" role="button">المزيد</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
-          <img src="{% static 'img/microphone.png' %}" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+          <img src="{% static 'img/microphone.png' %}" alt="تحدث" style="width: 140px; height: 140px;">
           <h2>تحدث</h2>
-            <p>هل لك اهتمام بالبرمجيات الحرة أو الثقافة الحرة أو الأمان الرقمي؟  نريد أن نجلس معك لنسمع منك!</p>
-            <p><a class="btn btn-default" href="#" role="button">المزيد</a></p>
+            <p>هل لك اهتمام بأي مجال متصل بالبرمجيات الحرة أو الثقافة الحرة أو الأمان الرقمي؟  نريد أن نجلس معك وأن نسمع منك!</p>
+            <p><a class="btn btn-default" href="{% url 'speak' %}" role="button">المزيد</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
-          <img src="{% static 'img/community.png' %}" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+          <img src="{% static 'img/community.png' %}" alt="ارعَ" style="width: 140px; height: 140px;">
           <h2>ارعَ</h2>
-          <p>كن داعمًا للجهود الشبابية التطوعية الرامية للتوعية المجتمعية وإشاعة المعرفة!</p>
+          <p>كن داعمًا للجهود التطوعية الرامية للنفع العام والخدمة المجتمعية وإشاعة المعرفة.  كن داعما لمجتمع البرمجيات الحرة الناشئ في السعودية!</p>
           <p><a class="btn btn-default" href="{% url 'sponsor' %}" role="button">المزيد</a></p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
@@ -30,12 +30,12 @@
 
       <div class="row featurette">
         <div class="col-md-7 text-right">
-          <h2 class="featurette-heading">يوم الأمان الرقمي. <span class="text-muted">طه منذر يتحدث عن الهندسة الاجتماعية.</span></h2>
-          <p class="lead">طه منذر يتحدث عن الهندسة الاجتماعية ويقول اشياء كثيرة كثيرة وهالفراغ احاول اسدة باي كلام ورقصني ياعويس وسلام على محمد وعلى ال محمد</p>
+          <h2 class="featurette-heading">{{ featured_media.event_name }}. <span class="text-muted">{{ featured_media.header }}</span></h2>
+          <p class="lead">{{ featured_media.description }}</p>
         </div>
         <div class="col-md-5">
           <div class="embed-responsive embed-responsive-4by3">
-            <iframe class="embed-responsive-item" src="http://www.youtube-nocookie.com/embed/videoseries?list=PL2XZZMqQj7YB2CNWwpArg8xnEqZ1oRzbM" frameborder="0" allowfullscreen></iframe>
+            {{ featured_media.embed_code|safe }}
         </div>  
         </div>
       </div>

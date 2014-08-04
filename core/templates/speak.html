@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block title %}التحدث{% endblock %}
+{% block content %}
+<p>تهدف <strong>مجموعة مستخدمي لينكس الرياض</strong> لأن تكون منصة لتبادل المعارف والخبرات بين المهتمين والمهتمات بالبرمجيات الحرة والثقافة الحرة لبناء مجتمع متماسك من الخبراء والخبيرات الذين يجمعهم شغف الخدمة المجتمعية ونشر أسس البرمجيات الحرة. تقيم المجموعة لتحقيق هذه الغاية لقاءات دورية يستعرض فيها عدد من أعضاء المجموعة والمتعاونين معها في وقت موجز تجاربهم وخبراتهم وآرائهم عن شتى القضايا المتصلة بالبرمجيات الحرة والثقافة الحرة.</p>
+	<form action="{% url 'speak' %}" method="post" class="form">
+		{% csrf_token %}
+		{% bootstrap_form form %}
+		{% buttons %}
+			<button type="submit" class="btn btn-success">
+				 {% bootstrap_icon "ok-sign" %} أرسل 
+			</button>
+		{% endbuttons %}
+	</form>
+{% endblock %}

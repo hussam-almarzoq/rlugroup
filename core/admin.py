@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from core.models import FeaturedMedia
+
+class FeaturedMediaAdmin(admin.ModelAdmin):
+    list_display = ('header','description')
+
+admin.site.register(FeaturedMedia, FeaturedMediaAdmin)
