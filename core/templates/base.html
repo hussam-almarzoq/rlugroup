@@ -31,10 +31,11 @@
   <body>
 	<div id="header" class="container">
 		<div class="row">
-		        <div class="col-md-offset-3 col-md-1">
-				<img class="img-circle" src="{% static 'img/saudi-tux-arabin_140x140.jpg' %}">
+		        <div class="col-md-offset-2 col-md-2">
+				<a href="{% url 'home' %}"><img class="img-circle" src="{% static 'img/saudi-tux-arabin_140x140.jpg' %}"></a>
 			</div>
-		        <div class="col-md-5">
+
+		        <div class="col-md-6">
 				<h1><a href="{% url 'home' %}">مجموعة مستخدمي لينكس الرياض</a></h1>
 				<p id="subheader">حيث تأكل البطاريق الكبسة.</p>
 			</div>
@@ -57,6 +58,7 @@
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <li><a href="{% url 'events:home' %}">النشاطات</a></li>
+                <li><a href="{% url 'about' %}">عن</a></li>
                 <li><a href="{% url 'charter' %}">الميثاق</a></li>
                 <li><a href="{% url 'contact' %}">تواصل</a></li>
               </ul>
