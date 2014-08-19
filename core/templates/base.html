@@ -57,10 +57,23 @@
             </div>
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li><a href="{% url 'events:home' %}">النشاطات</a></li>
+                <li><a href="{% url 'home:home' %}">الرئيسية</a></li>
+                <li><a href="{% url 'events' %}">النشاطات</a></li>
+                <li><a href="{% url 'about' %}">المدونة</a></li>
                 <li><a href="{% url 'about' %}">عن</a></li>
                 <li><a href="{% url 'charter' %}">الميثاق</a></li>
                 <li><a href="{% url 'contact' %}">تواصل</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">أخرى <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="http://getsoftwarefreedom.org">ماهي البرمجيات الحرة</a></li>
+                <li><a href="http://arabgnulinux.org">عرب جنو/لينكس</a></li>
+                <li class="divider"></li>
+                <li><h1 class="dropdown-header">تابعنا</h1></li>
+                <li><a href="https://twitter.com/RLUGroup">تويتر</a></li>
+                <li><a href="https://groups.google.com/forum/#!forum/riyadh-lug">المجموعة البريدية</a></li>
+              </ul>
+            </li>
               </ul>
             </div>
           </div>
