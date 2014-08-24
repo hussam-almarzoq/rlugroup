@@ -12,13 +12,13 @@
         <div class="col-md-4">
           <img src="{% static 'img/microphone.png' %}" alt="تحدث" style="width: 140px; height: 140px;">
           <h2>تحدث</h2>
-            <p>هل لك اهتمام بأي مجال متصل بالبرمجيات الحرة أو الثقافة الحرة أو الأمان الرقمي؟  نريد أن نجلس معك وأن نسمع منك!</p>
+            <p>هل لك اهتمام بأي مجال ذي علاقة بالبرمجيات الحرة أو الثقافة الحرة أو الأمان الرقمي؟ نريد أن نجلس معك وأن نسمع منك! المجموعة قائمة كليا بمبادرات عفوية.</p>
             <p><a class="btn btn-default" href="{% url 'speak' %}" role="button">المزيد</a></p>
         </div><!-- /.col-md-4 -->
         <div class="col-md-4">
           <img src="{% static 'img/community.png' %}" alt="ارعَ" style="width: 140px; height: 140px;">
           <h2>ارعَ</h2>
-          <p>كن داعمًا للجهود التطوعية الرامية للنفع العام والخدمة المجتمعية وإشاعة المعرفة.  كن داعما لمجتمع البرمجيات الحرة الناشئ في السعودية!</p>
+          <p>كن داعمًا للجهود التطوعية الرامية للنفع العام والخدمة المجتمعية وإشاعة المعرفة. كن داعما لمجتمع البرمجيات الحرة الناشئ في السعودية. ثمة طرق كثيرة لذلك!</p>
           <p><a class="btn btn-default" href="{% url 'sponsor' %}" role="button">المزيد</a></p>
         </div><!-- /.col-md-4 -->
       </div><!-- /.row -->
@@ -30,7 +30,7 @@
 
       <div class="row featurette">
         <div class="col-md-7 text-right">
-          <h2 class="featurette-heading">{{ featured_media.event_name }}. <span class="text-muted">{{ featured_media.header }}</span></h2>
+          <h2 class="featurette-heading">{{ featured_media.event_name|safe }}. <span class="text-muted">{{ featured_media.header }}</span></h2>
           <p class="lead">{{ featured_media.description }}</p>
         </div>
         <div class="col-md-5">
