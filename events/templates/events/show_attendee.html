@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'events/event_base.html' %}
 {% block title %}{{ attendee.event.name }}{% endblock %}
 {% block content %}
 <h2>تذكرة حضور {{ attendee.event.name }} {% if not attendee.is_counted %}<span style="color: red;">(ملغاه)</span>{% endif %}</h2>

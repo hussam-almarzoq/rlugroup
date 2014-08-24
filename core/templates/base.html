@@ -59,9 +59,9 @@
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <li><a href="/blog/">المدونة</a></li>
-                <li><a href="{% url 'events:home' %}">النشاطات</a></li>
-                <li><a href="{% url 'charter' %}">الميثاق</a></li>
-                <li><a href="{% url 'about' %}">عن</a></li>
+                <li{% block events %}{% endblock %}><a href="{% url 'events:home' %}">النشاطات</a></li>
+                <li{% block charter %}{% endblock %}><a href="{% url 'charter' %}">الميثاق</a></li>
+                <li{% block about %}{% endblock %}><a href="{% url 'about' %}">عن</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">أخرى <b class="caret"></b></a>
               <ul class="dropdown-menu">

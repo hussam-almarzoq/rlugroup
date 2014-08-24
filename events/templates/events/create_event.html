@@ -1,4 +1,4 @@
-{% extends 'base.html' %}{% load bootstrap3 %}
+{% extends 'events/event_base.html' %}{% load bootstrap3 %}
 {% block title %}{% if edit %} تعديل {{ event.name }}{% else %}إضافة نشاط{% endif %}{% endblock %}
 {% block content %}
 <h2>{% if edit %} تعديل {{ event.name }}{% else %}إضافة نشاط{% endif %}</h2>

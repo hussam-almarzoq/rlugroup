@@ -1,4 +1,4 @@
-{% extends 'base.html' %}{% load bootstrap3 %}
+{% extends 'events/event_base.html' %}{% load bootstrap3 %}
 {% block title %}حضور {{ event.name }}{% endblock %}
 {% block content %}
 <h2>حضور <a href="{% url 'events:show_event' event.pk %}">{{ event.name }}</a></h2>
