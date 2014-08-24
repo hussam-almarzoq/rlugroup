@@ -85,16 +85,18 @@ background-color:#FCFCFC;
      
     /* Featurettes
     ------------------------- */
-     
+    .featurette {
+
+    }
     .featurette-divider {
       margin: 80px 0; /* Space out the Bootstrap <hr> more */
-      text-align: rightl
+      text-align: right;
     }
      
     /* Thin out the marketing headings */
     .featurette-heading {
       font-weight: 300;
-      line-height: 1;
+      line-height: 1.1em;
       letter-spacing: -1px;
     }
      
@@ -212,6 +214,19 @@ margin-top: 20px;
  color: black;
 }
 
+
+.license {
+ color: black;
+}
+
+.license:hover, .license:active {
+ text-decoration: none;
+ color: #5A5A5A;
+}
+
+blockquote {
+ font-size: 15px;
+}
 
 /*
 .navbar-inverse .navbar-nav > li > a {
