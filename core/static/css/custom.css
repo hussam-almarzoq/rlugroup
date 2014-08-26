@@ -233,6 +233,10 @@ blockquote {
  background-color: #D3D3D3;
 }
 
+.panel .label a {
+ color: white;
+}
+
 /*
 .navbar-inverse .navbar-nav > li > a {
     color: black;
