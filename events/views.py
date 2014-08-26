@@ -34,7 +34,7 @@ class EventForm(forms.ModelForm):
 
         if 'starting_date' in cleaned_data and 'announcement_date' \
            in cleaned_data:
-            if cleaned_data['announcement_date'] > cleaned_data['starting_date']:
+            if cleaned_data['announcement_date'] > cleaned_data['starting_date'].date():
                 msg = u'تاريخ الإعلان عن الحدث بعد تاريخ بدئه!'
                 # Add an error message to specific fields.
                 self._errors["starting_date"] = self.error_class([msg])
