@@ -33,6 +33,7 @@ RLUG-required URLS in the project's `url.py` are:
                        url(r'^sponsor/$', 'core.views.sponsor', name='sponsor'),
                        url(r'^speak/$', 'core.views.speak', name='speak'),
                        url(r'^contact/thanks/$', TemplateView.as_view(template_name='thanks.html'), name='thanks'),
+                       url(r'^about/$', TemplateView.as_view(template_name='about.html'), name='about'),
     )
 
 # Licensing
