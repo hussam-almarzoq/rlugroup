@@ -252,3 +252,15 @@ blockquote {
 .navbar-inverse .navbar-toggle {
    background-color: #333;
 }
+
+#next-event h2 {
+	font-weight: 700;
+	font-size: 45px;
+}
+
+#next-event img {
+	height: 270px;
+	margin-bottom: 20px;
+}
+
+

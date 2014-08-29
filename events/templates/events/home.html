@@ -6,7 +6,7 @@
 {% if next_event %}
 <div class="row" id="next-event">
       <div class="col-md-6 col-sm-12 text-center">
-	<h1>{{ next_event.name }}</h1>
+	<h2>{{ next_event.name }}</h2>
 	
 	<p>&nbsp;</p>
 	<p class="text-center">{{ next_event.short_description|safe }}</p>
@@ -20,7 +20,7 @@
       </div>
       <div class="col-md-6 col-sm-12">
       <div class="row text-center">
-      <img src="{% if next_event.image %}{{ next_event.image }}{% else %}{% static 'img/user.png' %}{% endif %}" class="img-rounded" style="height:270px;">
+      <img src="{% if next_event.image %}{{ next_event.image }}{% else %}{% static 'img/user.png' %}{% endif %}" class="img-rounded">
       </div>
     </div>
 </div>
