@@ -10,6 +10,7 @@ Additionally, it utilized the following freely-licensed Django apps:
 
 * `django-post_office`
 * `django-datetime-widget`
+* `django-bootstrap3`
 
 RLUG-required variables in `settings.py` (other than the variables
 required by DJANGO itself and the dependencies mentioned above):
