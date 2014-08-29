@@ -4,13 +4,25 @@
 
 
 {% if next_event %}
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<h3 class="panel-title">نشاط المجموعة القادم: <span class="label label-default"><a href="{% url 'events:show_event' next_event.pk %}">{{ next_event.name }}</a></span></h3>
+<div class="row" id="next-event">
+      <div class="col-md-6 col-sm-12 text-center">
+	<h1>{{ next_event.name }}</h1>
+	
+	<p>&nbsp;</p>
+	<p class="text-center">{{ next_event.short_description|safe }}</p>
+	
+	<div class="actions">
+	  <a class="btn btn-default btn-lg" href="{% url 'events:show_event' next_event.pk %}">
+	    إنضم إلينا
+	  </a>
 	</div>
-	 <div class="panel-body">
-		<p>{{ next_event.short_description|safe }} <span class="label label-success"><a href="{% url 'events:show_event' next_event.pk %}">المكان والتسجيل</a></span></p>
-	</div>
+	
+      </div>
+      <div class="col-md-6 col-sm-12">
+      <div class="row text-center">
+      <img src="{% if next_event.image %}{{ next_event.image }}{% else %}{% static 'img/user.png' %}{% endif %}" class="img-rounded" style="height:270px;">
+      </div>
+    </div>
 </div>
 {% endif %}
 <div class="panel panel-default">
