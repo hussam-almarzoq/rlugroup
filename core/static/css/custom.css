@@ -241,3 +241,14 @@ blockquote {
 .navbar-inverse .navbar-nav > li > a {
     color: black;
 }*/
+
+
+/* to fit custom fonts */
+.form-control {
+  height: auto;
+}
+
+/* nav humburger toggle it is hard to recognize*/
+.navbar-inverse .navbar-toggle {
+   background-color: #333;
+}
