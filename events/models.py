@@ -28,6 +28,9 @@ class Event(models.Model):
                                     verbose_name=u"متاح لـ",
                                     choices=available_to_choices)
     edit_date = models.DateTimeField(u'تاريخ التعديل', auto_now=True)
+
+    def __unicode__(self):
+        return self.name
     
 class Attendee(models.Model):
     event = models.ForeignKey(Event, null=True,
@@ -69,6 +72,9 @@ class Attendee(models.Model):
     def get_referral(self):
         referral_dict = dict(self.referral_choices)
         return referral_dict[self.referral]
+
+    def __unicode__(self):
+        return u"%s: %s" % (self.event.name, self.slug)
 
 class Organizer(models.Model):
     event = models.ForeignKey(Event, null=True,
