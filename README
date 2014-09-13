@@ -37,6 +37,12 @@ RLUG-required URLS in the project's `url.py` are:
                        url(r'^about/$', TemplateView.as_view(template_name='about.html'), name='about'),
     )
 
+Additionally, we have a daily scheduled script that automatically
+sends reminders two days in advance of events, `send_reminders.py`.
+The cronjob we use is:
+
+    0 0 * * * send_reminders.py  >> send_reminders.log 2>&1
+
 # Licensing
 
 Copyright (C) 2014 Osama Khalid.
