@@ -1,19 +1,37 @@
-	
+    @import url(https://fonts.googleapis.com/earlyaccess/droidarabicnaskh.css);
+    @import url(https://fonts.googleapis.com/css?family=Ubuntu);
+     
+@font-face {
+    font-family: 'KacstOne';
+    src: url('../fonts/KacstOne-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'KacstOne';
+    src: url('../fonts/KacstOne.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
 
     /* GLOBAL STYLES
     abdulmogeeb@arabgnulinux.org,
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     -------------------------------------------------- */
     /* Padding below the footer and lighter body text */
-    @import url(https://fonts.googleapis.com/earlyaccess/droidarabicnaskh.css);
-    @import url(https://fonts.googleapis.com/css?family=Ubuntu);
-     
-    body {
-background:
-background-color:#FCFCFC;
-      padding-bottom: 40px;
+
+    h1, #header, .featurette {
      font-family: 'Droid Arabic Naskh', 'ubuntu', sans-serif;
-      color: #5a5a5a;
+    }
+
+    body {
+	background-color:#FCFCFC;
+	padding-bottom: 40px;
+	font-family: 'KacstOne', 'ubuntu', sans-serif;
+	font-size: 17px;
+	color: #5a5a5a;
     }
      
      
