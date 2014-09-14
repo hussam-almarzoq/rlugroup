@@ -1,4 +1,4 @@
-{% extends 'events/event_base.html' %}
+{% extends 'events/event_base.html' %}{% load staticfiles %}
 {% block title %}{{ event.name }}{% endblock %}
 {% block meta %}
     <meta property="twitter:card" content="summary" />
@@ -10,7 +10,7 @@
 {% endblock %}
 {% block content %}
 
-<script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+<script src="{% static 'js/openlayers/OpenLayers.js'%}"></script>
     <style type="text/css">
 	#eventmap {
 		width: 100%;
