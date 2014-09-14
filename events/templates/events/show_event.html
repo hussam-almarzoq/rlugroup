@@ -36,7 +36,7 @@ $(function() {
       });
 </script>
 <div class="row">
-<h2>{{ event.name }}{% if perms.events.change_event %} (<a href="{% url 'events:edit_event' event.pk %}">عدّل</a>){% endif %}</h2>
+<h2 id="event-name">{{ event.name }}{% if perms.events.change_event %} (<a href="{% url 'events:edit_event' event.pk %}">عدّل</a>){% endif %}</h2>
 </div>
 <div class="row">
 	<div class="col-md-9">

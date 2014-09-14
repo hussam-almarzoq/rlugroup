@@ -22,7 +22,7 @@
     -------------------------------------------------- */
     /* Padding below the footer and lighter body text */
 
-    h1, #header, .featurette {
+    h1, #header, .featurette, #next-event h2, #event-name, .panel-heading h3 {
      font-family: 'Droid Arabic Naskh', 'ubuntu', sans-serif;
     }
 
