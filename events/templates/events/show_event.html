@@ -11,15 +11,6 @@
 {% block content %}
 
 <script src="{% static 'js/openlayers/OpenLayers.js'%}"></script>
-    <style type="text/css">
-	#eventmap {
-		width: 100%;
-		margin: 0;
-}
-	#time, #eventmap {
-		height: 200px;
-}
-    </style>
 <script>
 $(function() {
         map = new OpenLayers.Map("eventmap");
@@ -42,19 +33,28 @@ $(function() {
 	<div class="col-md-9">
 		<div id="eventmap"></div> 
 	</div>
-	<div class="col-md-3" id="time">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">متى؟</h3>
-			</div>
-			 <div class="panel-body">
-				{% if event.starting_date|date:"nj" == event.ending_date|date:"nj" %}
-					<p>{{ event.starting_date|date:"l j F o"  }}</br>من {{ event.starting_date|date:"h:i"  }} إلى {{ event.ending_date|date:"h:i"  }}</p>
-				{% else %}
-					<p><strong>البدء:</strong> {{ event.starting_date }}<br/><strong>الانتهاء:</strong> {{ event.ending_date }}</p>
-				{% endif %}
-			</div>
-		</div>
+	<div class="col-md-3">
+
+<div id="attend-panel" class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">احضر!</h3>
+	</div>
+	 <div class="panel-body">
+		{% if attendable == 'yes' %}
+			<p>ككل نشاطات المجموعة هذا النشاط مجاني عمومي. {{ event.name }} متاح
+			{% if event.available_to == 'M' %}للرجال
+			{% elif event.available_to == 'F' %}للنساء
+			{% elif event.available_to == 'A' %}للجميع رجالا ونساءً
+			{% endif %} لكن ينبغي تسجيل الحضور. <a id="attend-link" href="{% url 'events:attend' event.pk %}">سجّل حضورك الآن</a>
+			</p>
+			<p></p>
+		{% elif attendable == 'over' %}
+			<p>انتهى الحدث ولم يعد ممكنا التسجيل لحضوره.</p>
+		{% elif attendable == 'booked' %}
+			<p>اكتمل حجز مقاعد هذا الحدث ولم يعد ممكنا التسجيل لحضوره.</p>
+		{% endif %}
+	</div>
+</div>
 	</div>
 </div>
 <div class="row">
@@ -75,26 +75,18 @@ $(function() {
 	</table>
 	</div>
 	<div class="col-md-3">
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<h3 class="panel-title">احضر!</h3>
-	</div>
-	 <div class="panel-body">
-		{% if attendable == 'yes' %}
-			<p>ككل نشاطات المجموعة هذا النشاط مجاني عمومي. {{ event.name }} متاح
-			{% if event.available_to == 'M' %}للرجال
-			{% elif event.available_to == 'F' %}للنساء
-			{% elif event.available_to == 'A' %}للجميع رجالا ونساءً
-			{% endif %} لكن ينبغي تسجيل الحضور. <a href="{% url 'events:attend' event.pk %}">سجّل حضورك</a>
-			</p>
-			<p></p>
-		{% elif attendable == 'over' %}
-			<p>انتهى الحدث ولم يعد ممكنا التسجيل لحضوره.</p>
-		{% elif attendable == 'booked' %}
-			<p>اكتمل حجز مقاعد هذا الحدث ولم يعد ممكنا التسجيل لحضوره.</p>
-		{% endif %}
-	</div>
-</div>
+		<div id="time" class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">متى؟</h3>
+			</div>
+			 <div class="panel-body">
+				{% if event.starting_date|date:"nj" == event.ending_date|date:"nj" %}
+					<p>{{ event.starting_date|date:"l j F o"  }}</br>من {{ event.starting_date|date:"h:i"  }} إلى {{ event.ending_date|date:"h:i"  }}</p>
+				{% else %}
+					<p><strong>البدء:</strong> {{ event.starting_date }}<br/><strong>الانتهاء:</strong> {{ event.ending_date }}</p>
+				{% endif %}
+			</div>
+		</div>
 	</div>
 </div>
 
