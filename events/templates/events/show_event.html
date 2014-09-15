@@ -81,7 +81,7 @@ $(function() {
 			</div>
 			 <div class="panel-body">
 				{% if event.starting_date|date:"nj" == event.ending_date|date:"nj" %}
-					<p>{{ event.starting_date|date:"l j F o"  }}</br>من {{ event.starting_date|date:"h:i A"  }} إلى {{ event.ending_date|date:"h:i A"  }}</p>
+					<p>{{ event.starting_date|date:"l j F o"  }}</br>من {{ event.starting_date|date:"g:i A"  }} إلى {{ event.ending_date|date:"g:i A"  }}</p>
 				{% else %}
 					<p><strong>البدء:</strong> {{ event.starting_date }}<br/><strong>الانتهاء:</strong> {{ event.ending_date }}</p>
 				{% endif %}
