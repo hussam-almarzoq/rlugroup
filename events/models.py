@@ -49,7 +49,7 @@ class Attendee(models.Model):
         ('T', u'قرأت عنه في تويتر'), # Twitter
         ('F', u'قرأت عنه في فيسبوك'),  # Facebook
         ('P', u'شاهدت إعلانا معلقاإعلان'), # Poster
-        ('M', u'أخبرني عنه صديق صديق'), # Word-of-mouth
+        ('M', u'أخبرني عنه صديق'), # Word-of-mouth
         ('W', u'موقع المجموعة'), # Our website
         )
     referral = models.CharField(max_length=1, verbose_name=u"كيف عرفت عن الحدث؟", choices=referral_choices)
