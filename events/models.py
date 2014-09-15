@@ -48,7 +48,7 @@ class Attendee(models.Model):
     referral_choices = (
         ('T', u'قرأت عنه في تويتر'), # Twitter
         ('F', u'قرأت عنه في فيسبوك'),  # Facebook
-        ('P', u'شاهدت إعلانا معلقاإعلان'), # Poster
+        ('P', u'شاهدت إعلانا معلقا'), # Poster
         ('M', u'أخبرني عنه صديق'), # Word-of-mouth
         ('W', u'موقع المجموعة'), # Our website
         )
