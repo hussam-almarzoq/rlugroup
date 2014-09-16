@@ -25,7 +25,7 @@ class TimeFilter(admin.SimpleListFilter):
         elif self.value() == 'f':
             return queryset.filter(starting_date__gte=now)
 
-class TimeFilter(admin.SimpleListFilter):
+class AttendeeTimeFilter(admin.SimpleListFilter):
     title = u"الوقت"
     parameter_name = 'time'
     def lookups(self, request, model_admin):
@@ -36,20 +36,20 @@ class TimeFilter(admin.SimpleListFilter):
     def queryset(self, request, queryset):
         now = datetime.now()
         if self.value() == 'p':
-            return queryset.filter(starting_date__lte=now)
+            return queryset.filter(event__starting_date__lte=now)
         elif self.value() == 'f':
-            return queryset.filter(starting_date__gte=now)
+            return queryset.filter(event__starting_date__gte=now)
 
 class GenderFilter(admin.SimpleListFilter):
     title = u"الجنس"
     parameter_name = 'gender'
+
     def lookups(self, request, model_admin):
         return (
                 ('m', u'رجال'),
                 ('f', u'نساء'),
             )
     def queryset(self, request, queryset):
-        now = datetime.now()
         if self.value() == 'm':
             return queryset.filter(gender='M')
         elif self.value() == 'f':
@@ -58,6 +58,7 @@ class GenderFilter(admin.SimpleListFilter):
 class PublishedFilter(admin.SimpleListFilter):
     title = u"النشر"
     parameter_name = 'published'
+
     def lookups(self, request, model_admin):
         return (
                 ('y', u'نشاطات منشورة'), # past
@@ -74,11 +75,11 @@ class PublishedFilter(admin.SimpleListFilter):
 class EventAdmin(admin.ModelAdmin):
     list_display = ('name','submitter', 'starting_date', 'ending_date', 'announcement_date')
     list_filter = [TimeFilter, PublishedFilter]
-    inlines = [AttendeeInline,]
+    inlines = [AttendeeInline, TimeFilter]
 
 class AttendeeAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'event', 'gender')
-    list_filter = [GenderFilter]
+    list_display = ('name', 'email', 'event', 'gender', 'submission_date')
+    list_filter = [GenderFilter, AttendeeTimeFilter]
 
 admin.site.register(Event, EventAdmin)
 admin.site.register(Attendee, AttendeeAdmin)
