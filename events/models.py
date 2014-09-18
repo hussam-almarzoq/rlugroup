@@ -65,14 +65,6 @@ class Attendee(models.Model):
                                      default=True,
                                      choices=is_counted_choices)
 
-    def get_gender(self):
-        gender_dict = dict(self.gender_choices)
-        return gender_dict[self.gender]
-
-    def get_referral(self):
-        referral_dict = dict(self.referral_choices)
-        return referral_dict[self.referral]
-
     def __unicode__(self):
         return u"%s: %s" % (self.event.name, self.slug)
 
