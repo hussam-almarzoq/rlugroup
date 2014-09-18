@@ -73,9 +73,13 @@ class PublishedFilter(admin.SimpleListFilter):
 
 
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('name', 'submitter', 'starting_date', 'ending_date', 'announcement_date')
+    list_display = ('name', 'submitter', 'starting_date', 'ending_date', 'counted_attendees', 'announcement_date')
     list_filter = [TimeFilter, PublishedFilter]
     inlines = [AttendeeInline]
+
+    def counted_attendees(self, obj):
+        return obj.attendee_set.filter(is_counted=True).count()
+    counted_attendees.short_description = u'الحضور المحسوبون'
 
 class AttendeeAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'event', 'gender', 'is_counted', 'submission_date')
