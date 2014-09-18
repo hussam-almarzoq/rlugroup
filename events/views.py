@@ -138,11 +138,13 @@ def show_event(request, event_id):
         event = get_object_or_404(Event, pk=event_id,
                                   announcement_date__lte=now)
 
-    if event.ending_date > now and event.max_attendees > event.attendee_set.count():
+    counted_attendees = event.attendee_set.filter(is_counted=True).count()
+
+    if event.ending_date > now and event.max_attendees > counted_attendees:
         attendable = 'yes'
     elif now > event.ending_date:
         attendable = 'over'
-    elif event.attendee_set.count() >= event.max_attendees:
+    elif counted_attendees >= event.max_attendees:
         attendable = 'book'
 
     event_url = reverse('events:show_event', args=(event.pk,))
