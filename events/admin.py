@@ -73,15 +73,13 @@ class PublishedFilter(admin.SimpleListFilter):
 
 
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('name','submitter', 'starting_date', 'ending_date', 'announcement_date')
+    list_display = ('name', 'submitter', 'starting_date', 'ending_date', 'announcement_date')
     list_filter = [TimeFilter, PublishedFilter]
-    inlines = [AttendeeInline, TimeFilter]
+    inlines = [AttendeeInline]
 
 class AttendeeAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'event', 'gender', 'submission_date')
+    list_display = ('name', 'email', 'event', 'gender', 'is_counted', 'submission_date')
     list_filter = [GenderFilter, AttendeeTimeFilter]
 
 admin.site.register(Event, EventAdmin)
 admin.site.register(Attendee, AttendeeAdmin)
-#admin.site.register(EmailTemplate)
-
