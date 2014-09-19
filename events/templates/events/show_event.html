@@ -9,23 +9,6 @@
     <meta property="twitter:url" content="{{ full_url }}" />
 {% endblock %}
 {% block content %}
-
-<script src="{% static 'js/openlayers/OpenLayers.js'%}"></script>
-<script>
-$(function() {
-        map = new OpenLayers.Map("eventmap");
-        var mapnik         = new OpenLayers.Layer.OSM();
-        var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
-        var toProjection   = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
-        var position       = new OpenLayers.LonLat({{ event.long_position|stringformat:"f" }}, {{ event.lat_position|stringformat:"f" }}).transform( fromProjection, toProjection);
-        var zoom           = 15;
-        var markers = new OpenLayers.Layer.Markers( "Markers" );
-        map.addLayer(markers);
-        map.addLayer(mapnik);
-        markers.addMarker(new OpenLayers.Marker(position));
-        map.setCenter(position, zoom );
-      });
-</script>
 <div class="row">
 <h2 id="event-name">{{ event.name }}{% if perms.events.change_event %} (<a href="{% url 'events:edit_event' event.pk %}">عدّل</a>){% endif %}</h2>
 </div>
@@ -81,7 +64,7 @@ $(function() {
 			</div>
 			 <div class="panel-body">
 				{% if event.starting_date|date:"nj" == event.ending_date|date:"nj" %}
-					<p>{{ event.starting_date|date:"l j F o"  }}</br>من {{ event.starting_date|date:"g:i A"  }} إلى {{ event.ending_date|date:"g:i A"  }}</p>
+					<p>{{ event.starting_date|date:"l j F o"  }}<br/>من {{ event.starting_date|date:"g:iA"  }} إلى {{ event.ending_date|date:"g:iA"  }}</p>
 				{% else %}
 					<p><strong>البدء:</strong> {{ event.starting_date }}<br/><strong>الانتهاء:</strong> {{ event.ending_date }}</p>
 				{% endif %}
@@ -89,5 +72,20 @@ $(function() {
 		</div>
 	</div>
 </div>
-
+<script src="{% static 'js/openlayers/OpenLayers.js'%}"></script>
+<script>
+$(function() {
+        map = new OpenLayers.Map("eventmap");
+        var mapnik         = new OpenLayers.Layer.OSM();
+        var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
+        var toProjection   = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
+        var position       = new OpenLayers.LonLat({{ event.long_position|stringformat:"f" }}, {{ event.lat_position|stringformat:"f" }}).transform( fromProjection, toProjection);
+        var zoom           = 15;
+        var markers = new OpenLayers.Layer.Markers( "Markers" );
+        map.addLayer(markers);
+        map.addLayer(mapnik);
+        markers.addMarker(new OpenLayers.Marker(position));
+        map.setCenter(position, zoom );
+      });
+</script>
 {% endblock %}
