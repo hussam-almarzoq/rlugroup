@@ -23,19 +23,20 @@
 		<h3 class="panel-title">احضر!</h3>
 	</div>
 	 <div class="panel-body">
+			<p>
 		{% if attendable == 'yes' %}
-			<p>ككل نشاطات المجموعة هذا النشاط مجاني عمومي. {{ event.name }} متاح
+			ككل نشاطات المجموعة هذا النشاط مجاني عمومي. {{ event.name }} متاح
 			{% if event.available_to == 'M' %}للرجال
 			{% elif event.available_to == 'F' %}للنساء
 			{% elif event.available_to == 'A' %}للجميع رجالا ونساءً
 			{% endif %} لكن ينبغي تسجيل الحضور. <a id="attend-link" href="{% url 'events:attend' event.pk %}">سجّل حضورك الآن</a>
-			</p>
-			<p></p>
+
 		{% elif attendable == 'over' %}
-			<p>انتهى الحدث ولم يعد ممكنا التسجيل لحضوره.</p>
+			انتهى الحدث. نراك في <a href="{% url 'events:home' %}">حدث قادم</a>!
 		{% elif attendable == 'booked' %}
-			<p>اكتمل حجز مقاعد هذا الحدث ولم يعد ممكنا التسجيل لحضوره.</p>
+			اكتمل حجز مقاعد هذا الحدث ولم يعد ممكنا التسجيل لحضوره. نراك في <a href="{% url 'events:home' %}">حدث قادم</a>!
 		{% endif %}
+			</p>
 	</div>
 </div>
 	</div>
