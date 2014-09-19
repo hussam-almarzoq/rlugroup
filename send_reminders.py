@@ -1,3 +1,4 @@
+# -*- coding: utf-8  -*-
 import datetime
 import os
 
@@ -15,9 +16,9 @@ two_days_latter = datetime.datetime.today().date() + datetime.timedelta(2)
 for event in Event.objects.filter(starting_date__gte=now):
     print event.starting_date.date() == two_days_latter, event.starting_date.date(), two_days_latter
     if event.starting_date.date() == two_days_latter:
-        print "It will be two days until %s. Scanning its attendees.".encode('utf-8') % event.name
+        print (u"It will be two days until %s. Scanning its attendees." % event.name).encode('utf-8')
         for attendee in event.attendee_set.filter(is_counted=True):
-            print u"Adding a reminder to %s for %s".encode('utf-8') % (attendee.email, event.name)
+            print (u"Adding a reminder to %s for %s" % (attendee.email, event.name)).encode('utf-8')
             attendee_url = reverse('events:show_attendee',
                                    args=(event.pk, attendee.slug))
             mail.send([attendee.email], settings.EVENT_FROM_EMAIL,
