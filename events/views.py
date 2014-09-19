@@ -145,7 +145,7 @@ def show_event(request, event_id):
     elif now > event.ending_date:
         attendable = 'over'
     elif counted_attendees >= event.max_attendees:
-        attendable = 'book'
+        attendable = 'booked'
 
     event_url = reverse('events:show_event', args=(event.pk,))
     full_url = request.build_absolute_uri(event_url)
@@ -165,7 +165,7 @@ def attend_event(request, event_id):
         context['error'] = 'done'
     elif event.announcement_date > now.date():
         context['error'] = 'unavailable'
-    elif event.attendee_set.count() == event.max_attendees:
+    elif event.attendee_set.filter(is_counted=True).count() >= event.max_attendees:
         context['error'] = 'booked'
     else:
         if request.method == 'POST':
