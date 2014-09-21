@@ -11,7 +11,7 @@ from events.models import Attendee, Event
 from post_office import mail
 
 
-quoted_addresses = [] # To aviod sending an email twice.
+queued_addresses = [] # To aviod sending an email twice.
 
 event_pk = int(sys.argv[1])
 survey_url = sys.argv[2]
@@ -21,6 +21,11 @@ event = Event.objects.get(pk=event_pk)
 print u"Surveing {0} attendees with: {1}".format(event.name, survey_url).encode('utf-8')
 
 for attendee in event.attendee_set.filter(is_counted=True):
+    if attendee.email in queued_addresses:
+        continue
+    else:
+        queued_addresses.append(attendee.email)
+
     print u"Queuing the survey to {0}".format(attendee.email).encode('utf-8')
     mail.send([attendee.email], settings.EVENT_FROM_EMAIL,
               template='event_survey',
