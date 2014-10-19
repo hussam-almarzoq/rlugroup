@@ -5,7 +5,7 @@
     <meta property="twitter:site" content="@RLUGroup" />
     <meta property="twitter:creator" content="@RLUGroup" />
     <meta property="twitter:title" content="{{ event.name }}" />
-    <meta property="twitter:description" content="{{ event.short_description|safe }}" />
+    <meta property="twitter:description" content="{{ event.short_description|striptags }}" />
     <meta property="twitter:url" content="{{ full_url }}" />
 {% endblock %}
 {% block content %}
