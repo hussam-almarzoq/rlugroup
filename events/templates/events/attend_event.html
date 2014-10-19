@@ -3,20 +3,27 @@
 {% block content %}
 <h2>حضور <a href="{% url 'events:show_event' event.pk %}">{{ event.name }}</a></h2>
 {% if error %}
-<p class="alert alert-warning">
-{% if error == 'booked' %}
-حجزت جميع المقاعد، ولم يعد ممكنا التسجيل في هذا النشاط. نتطلع لرؤيتك في نشاط قادم!
-{% elif error == 'done' %}
-	{% if edit %}
-انتهى {{ event.name }} ولم يعد بمقدورك تعديل معلومات حضورك.
-	{% else %}
-انتهى {{ event.name }} ولم يعد بمقدورك التسجيل.
+	<p class="alert alert-warning">
+	{% if error == 'booked' %}
+	حجزت جميع المقاعد، ولم يعد ممكنا التسجيل في هذا النشاط. نتطلع لرؤيتك في نشاط قادم!
+	{% elif error == 'done' %}
+		{% if edit %}
+	انتهى {{ event.name }} ولم يعد بمقدورك تعديل معلومات حضورك.
+		{% else %}
+	انتهى {{ event.name }} ولم يعد بمقدورك التسجيل.
+		{% endif %}
+	{% elif error == 'unavailable' %}
+	هذا النشاط غير متاح للتسجيل بعد.
 	{% endif %}
-{% elif error == 'unavailable' %}
-هذا النشاط غير متاح للتسجيل بعد.
-{% endif %}
 </p>
 {% else %}
+{% if event.available_to != 'A' %}
+	<p class="alert alert-warning">
+	{% if event.available_to == 'M' %}نود أن ننوه إلا أن هذا النشاط متاح للرجال فقط.{% endif %}
+	{% if event.available_to == 'F' %}نود أن ننوه إلا أن هذا النشاط متاح للنساء فقط.{% endif %}
+	</p>
+{% endif %}
+
 	<form action="{% if edit %}{% url 'events:control_attendee' event.pk attendee.slug %}{% else %}{% url 'events:attend' event.pk %}{% endif %}" method="post" class="form">
 		{% csrf_token %}
 		{% bootstrap_form form %}

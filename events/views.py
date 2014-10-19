@@ -56,11 +56,29 @@ class EventForm(forms.ModelForm):
              'ending_date': DateTimeWidget(attrs={'id':"starting_date"})
          }
 
-class AttendeeForm(forms.ModelForm):
+class GeneralAttendeeForm(forms.ModelForm):
     class Meta:
         model = Attendee
         fields = ['name', 'email', 'gender', 'add_to_mailing_list',
                   'referral']
+
+class MaleAttendeeForm(GeneralAttendeeForm):
+    gender_choices = (
+        ('', '---------'),
+        ('M', u'ذكر'),
+        )
+    gender = forms.ChoiceField(choices=gender_choices,
+                               label=Attendee._meta.get_field('gender').verbose_name,
+                               help_text=Attendee._meta.get_field('gender').help_text)
+
+class FemaleAttendeeForm(GeneralAttendeeForm):
+    gender_choices = (
+        ('', '---------'),
+        ('F', u'أنثى'),
+        )
+    gender = forms.ChoiceField(choices=gender_choices,
+                               label=Attendee._meta.get_field('gender').verbose_name,
+                               help_text=Attendee._meta.get_field('gender').help_text)
 
 class OrganizationForm(forms.ModelForm):
     class Meta:
@@ -160,6 +178,12 @@ def attend_event(request, event_id):
     now = timezone.now()
     event = get_object_or_404(Event, pk=event_id)
     context = {'event': event}
+    if event.available_to == 'A':
+        form_class = GeneralAttendeeForm
+    elif event.available_to == 'M':
+        form_class = MaleAttendeeForm
+    elif event.available_to == 'F':
+        form_class = FemaleAttendeeForm
 
     if now >= event.ending_date:
         context['error'] = 'done'
@@ -176,7 +200,7 @@ def attend_event(request, event_id):
                 except ObjectDoesNotExist:
                     break
             attendee = Attendee(event=event, slug=random_slug)
-            form = AttendeeForm(request.POST, instance=attendee)
+            form = form_class(request.POST, instance=attendee)
             if form.is_valid():
                 new_attendee = form.save()
                 after_url = reverse('events:show_attendee',
@@ -190,7 +214,7 @@ def attend_event(request, event_id):
             else:
                 context['form'] = form
         elif request.method == 'GET':
-            form = AttendeeForm()
+            form = form_class()
             context['form'] = form
 
     return render(request, 'events/attend_event.html', context)
@@ -222,7 +246,14 @@ def control_attendee(request, event_id, attendee_slug):
                                    slug=attendee_slug)
     now = timezone.now()
     context = {'attendee': attendee, 'event': event, 'edit': True}
-    form = AttendeeForm(instance=attendee)
+    if event.available_to == 'A':
+        form_class = GeneralAttendeeForm
+    elif event.available_to == 'M':
+        form_class = MaleAttendeeForm
+    elif event.available_to == 'F':
+        form_class = FemaleAttendeeForm
+
+    form = form_class(instance=attendee)
     if now > event.starting_date:
         context['error'] = 'done'
     else:
@@ -240,7 +271,7 @@ def control_attendee(request, event_id, attendee_slug):
 
                 return HttpResponseRedirect(after_url)
             else: # Normal editing
-                form = AttendeeForm(request.POST, instance=attendee)
+                form = form_class(request.POST, instance=attendee)
                 if form.is_valid():
                     form.save()
                     after_url = reverse('events:show_attendee',
