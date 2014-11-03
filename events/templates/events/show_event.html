@@ -25,7 +25,7 @@
 	 <div class="panel-body">
 			<p>
 		{% if attendable == 'yes' %}
-			ككل نشاطات المجموعة هذا النشاط مجاني عمومي. {{ event.name }} متاح
+			ككل نشاطات المجموعة هذا النشاط مجاني عمومي. <strong>{{ event.name }}</strong> متاح
 			{% if event.available_to == 'M' %}للرجال
 			{% elif event.available_to == 'F' %}للنساء
 			{% elif event.available_to == 'A' %}للجميع رجالا ونساءً
