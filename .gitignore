@@ -1,0 +1,14 @@
+*.log
+*.pot
+*.pyc
+local_settings.py
+manage.py
+sc_portal/
+mediafiles/
+.bashrc
+.project
+.pydevproject
+.settings/
+*.sqlite3
+*~
+*#
